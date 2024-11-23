@@ -1,0 +1,46 @@
+Client Code: inputdb.html
+<html>  
+<head>  
+<title>Database connection in PHP</title>  
+</head>  
+<body>  
+<form action="dbserver.php" method="post">  
+    Enter the Reg Number:<br>  
+    <input type="number" name="reg" id="number">  
+    <input type="submit" name="submit" value="Submit">  
+</form> 
+</body>
+</html>
+
+SERVER CODE: dbserver.php
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname="jai";
+if ($_POST)
+{
+$conn = new mysqli($servername, $username, $password, $dbname);
+$sql = "SELECT * FROM student WHERE regno =".$_POST["reg"];
+$result = $conn->query($sql);
+while($row = $result->fetch_assoc()) {
+    echo "Reg Number: " . $row["regno"]. " - Name: " . $row["name"]. " -Gender: " . $row["gender"]."- Age: " .$row["age"]. "<br>";
+}
+}
+?>
+
+
+Table Structure:
+name Varchar(20)
+rollno int
+gender varchar(1)
+age int
+
+
+
+
+
+
+
+
+
